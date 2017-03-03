@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1= title
+  ul.pagination-demo
+  each item,i in items
+    h5
+      button.btn.btn-success.btn-xs #{item.type}
+        span.label.label-success #{i+1}
+      a(href='#{item.link}' target='_blank') #{item.title}
+  ul.pagination-demo
+  script(src='/javascripts/jquery.twbsPagination.min.js')
+  script.
+    $(document).ready(function(){
+      $('.pagination-demo').twbsPagination({
+        totalPages:#{items.totalPages},
+        visiblePages:7,
+        first:'首页',
+        last:'末页',
+        prev:'上一页',
+        next:'下一页',
+        href:'?tab=all&page={{number}}',
+        onPageClick:function(evt,page){
+          $('#page-content').text('page '+page);
+        }
+      })
+    })
